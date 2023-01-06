@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+require 'json'
+
+program = ARGV[0]
+# TODO: check if file exists?
+vscode_launch_file = JSON.load_file('.vscode/launch.json')
+new_config = {
+  "name": "debug #{program}",
+  "type": 'Ruby',
+  "request": 'launch',
+  "program": "${workspaceRoot}/#{program}"
+}
+vscode_launch_file['configurations'].push(new_config)
+File.open('.vscode/launch.json', 'w') do |f|
+  f.puts JSON.pretty_generate(vscode_launch_file)
+end

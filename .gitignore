@@ -1,0 +1,4 @@
+.bundle/
+.vscode/
+vendor/
+env/
